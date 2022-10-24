@@ -15,5 +15,12 @@
         "psr-4": {
             "Ridwan\\Customer\\": "src/"
         }
-    }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ridwan\\Customer\\CustomerServiceProvider"
+            ]
+        }
+    } 
 }
