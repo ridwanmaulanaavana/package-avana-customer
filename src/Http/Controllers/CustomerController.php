@@ -8,8 +8,12 @@ use Ridwan\Customer\Models\OrderDetail;
 use Ridwan\Customer\Models\Orders;
 use Ridwan\Customer\Models\Payments;
 
+
 //use Ridwan\Facades\AvanaCustomer as Avana;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Ridwan\Customer\Mail\avanaMailable;
+
 
 class CustomerController extends Controller
 {
@@ -273,7 +277,7 @@ class CustomerController extends Controller
             $data[$i]['amount'] = $amount->price;
             $data[$i]['amount_due'] = $amount->total;
             $statPayments = Payments::select('status')->where(['order_id'=>$val->order_id])->first();
-            $data[$i]['amount_due'] = $this->statusPay($statPayments->status);
+            $data[$i]['status'] = $this->statusPay($statPayments->status);
             $i++;
         }
         return $data;
@@ -307,12 +311,54 @@ class CustomerController extends Controller
 
     public function CreateDataDummyOrders(){
         $user = "avana_";
-        
         for($i=1;$i<=100;$i++){
-            
+            $insertCustomers = new Customers();
+            $insertCustomers->name = $user.$i;
+            $insertCustomers->email = $user.$i.'@gmail.com';
+            $insertCustomers->phone_number = "081221519941";
+            $insertCustomers->save();
         }
 
+        $pelanggan = Customers::all();
+        $y=1;
+        foreach($pelanggan as $val){
+            $insertOrders               = new Orders();
+            $insertOrders->order_date   = '2022-10-24';
+            $insertOrders->customer_id  = $val->id;
+            $insertOrders->sub_total    = 1000 + $y;
+            $insertOrders->discount     = '0';
+            $insertOrders->order_id     = $this->cekLengthStringAddZero($y);
+            $insertOrders->save();
+            $y++;
+        }
 
+        $Orders = Orders::all();
+        $z=1;
+        foreach($Orders as $valOrders){
+            $insertOrderDetail              = new OrderDetail();
+            $insertOrderDetail->order_id    = $valOrders->order_id;
+            $insertOrderDetail->item_id     = $z;
+            $insertOrderDetail->qty         = "1";
+            $insertOrderDetail->price       = $valOrders->sub_total - 1;
+            $insertOrderDetail->discount    = $z;
+            $insertOrderDetail->total       = $valOrders->sub_total;            
+            $insertOrderDetail->save();
+            $z++;
+
+            $InsertPayments              = new Payments();
+            $InsertPayments->order_id    = $valOrders->order_id;
+            $InsertPayments->status      = "1";
+            $InsertPayments->save();
+        }
+
+        $result['rc'] = "00";
+        $result['desc'] = "Data Dummy Created";
+        echo json_encode($result);
+    }
+
+
+    public function sendEmail(){
+        Mail::to(config('customer.send_email_to'))->send(new avanaMailable("Success tes package"));
     }
 
 }

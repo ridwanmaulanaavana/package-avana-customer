@@ -28,8 +28,9 @@ Route::group(['namespace'=>'Ridwan\Customer\Http\Controllers'],function(){
     Route::post('UpdateStatusPayment','CustomerController@UpdateStatusPayment');
     Route::get('GetAllTransaction','CustomerController@GetAllTransaction')->name('GetAllTransaction');
     Route::get('GetTransactionByQuery','CustomerController@GetTransactionByQuery')->name('GetTransactionByQuery');
+    Route::get('CreateDataDummyOrders','CustomerController@CreateDataDummyOrders')->name('CreateDataDummyOrders');
+    Route::get('sendEmail','CustomerController@sendEmail')->name('sendEmail');
     
-
 
 
 });

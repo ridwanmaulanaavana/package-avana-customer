@@ -12,14 +12,11 @@ class CustomerServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/views', 'customer');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->mergeConfigFrom(__DIR__.'/config/customer.php', 'customer');
 
-        // $this->mergeConfigFrom(
-        //     __DIR__.'/../config/courier.php', 'courier'
-        // );
-
-        // $this->publishes([
-        //     __DIR__.'/../config/courier.php' => config_path('courier.php'),
-        // ]);
+        $this->publishes([
+            __DIR__.'/config/customer.php' => config_path('customer.php'),
+        ]);
 
 
     }
