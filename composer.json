@@ -1,0 +1,19 @@
+{
+    "name": "ridwan/customer",
+    "description": "ini adalah data pelanggan avana.id",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ridwanmaulanaodoo",
+            "email": "ridwanmaulanaodoo@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Ridwan\\Customer\\": "src/"
+        }
+    }
+}
