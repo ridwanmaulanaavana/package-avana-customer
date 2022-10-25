@@ -2,6 +2,14 @@
 
 ## Installing  ridwanmaulanaavana/customer
 
+
+
+[![Issues](https://img.shields.io/github/issues/ridwanmaulanaavana/package-avana-customer?style=flat-square)](https://github.com/ridwanmaulanaavana/package-avana-customer/issues)
+
+[![Stars](https://img.shields.io/github/stars/ridwanmaulanaavana/package-avana-customer?style=flat-square)](https://github.com/ridwanmaulanaavana/package-avana-customer/stargazers)
+
+
+
 - ini adalah API untuk mengelola customer avana adapun beberapa method yang dapat digunakan yaitu :
 - customer dengan method get --> untuk menampikan gui sederhana yang menampilkan data user
 - customer dengan method post  --> untuk insert data customer melalui gui
@@ -30,3 +38,5 @@ The recommended way to install ridwanmaulanaavana is through
 ```bash
 composer require ridwanmaulanaavana/customer
 ```
+
+
